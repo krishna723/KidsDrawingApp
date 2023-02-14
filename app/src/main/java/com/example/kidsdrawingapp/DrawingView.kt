@@ -18,8 +18,9 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
     private var color= Color.BLACK
     private var canvas: Canvas?=null
 
-
-    init{        setUpDrawing()
+//initialize the code
+    init{
+        setUpDrawing()
     }
 
     private fun setUpDrawing() {
