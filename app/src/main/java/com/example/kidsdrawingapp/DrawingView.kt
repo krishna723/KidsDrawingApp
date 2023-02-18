@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Color.alpha
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -16,9 +17,12 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
     private var mDrawPaint: Paint?=null
     private var mCanvasPaint: Paint?=null
     private var mBrushSize:Float=0.toFloat()
-    private var color= Color.BLACK
+    private var color= Color.RED
     private var canvas: Canvas?=null
     private var mPaths=ArrayList<CustomPath>()
+    private var lastX = 0f
+    private var lastY = 0f
+
 
 
 //initialize the code
@@ -28,12 +32,14 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
 
     private fun setUpDrawing() {
         mDrawPaint= Paint()
+       // mDrawPaint!!.isAntiAlias()
         mDrawPath=CustomPath(color,mBrushSize)
         mDrawPaint!!.color=color
         mDrawPaint!!.style= Paint.Style.STROKE
         mDrawPaint!!.strokeJoin= Paint.Join.ROUND
         mDrawPaint!!.strokeCap= Paint.Cap.ROUND
-        mCanvasPaint= Paint(Paint.DITHER_FLAG)
+      //  mDrawPaint.run { alpha(0xff) }
+        mCanvasPaint= Paint(Paint.ANTI_ALIAS_FLAG)
         //mBrushSize=20.toFloat()
 
 
@@ -73,6 +79,8 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
                 mDrawPath!!.brushThickness=mBrushSize
                 mDrawPath!!.reset()
                 mDrawPath!!.moveTo(touchX!!,touchY!!)
+//                lastX = touchX
+//                lastY = touchY
 
             }
             MotionEvent.ACTION_MOVE->{
@@ -81,6 +89,13 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
                         mDrawPath!!.lineTo(touchX,touchY)
                     }
                 }
+//                val dx = Math.abs(touchX!!-lastX)
+//                val dy = Math.abs(touchY!! - lastY)
+//                if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+//                    mDrawPath?.quadTo(lastX, lastY, (touchX + lastX) / 2, (touchX + lastY) / 2)
+//                    lastX = touchX
+//                    lastY = touchX
+//                }
             }
             MotionEvent.ACTION_UP->{
                 mPaths.add(mDrawPath!!)
@@ -96,6 +111,16 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
         mBrushSize=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,newSize,resources.displayMetrics)
         mDrawPaint!!.strokeWidth=mBrushSize
     }
+
+
+    fun setColor(newColor: String){
+        color=Color.parseColor(newColor)
+        mDrawPaint!!.color=color
+    }
+
+//    companion object{
+//        const val TOUCH_TOLERANCE = 4f
+//    }
     internal inner class CustomPath(var color: Int, var brushThickness: Float): android.graphics.Path() {
 
     }
