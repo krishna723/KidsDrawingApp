@@ -23,13 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/image"/>
+            />
 
         <com.example.kidsdrawingapp.DrawingView
             android:id="@+id/drawing_View"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#56E0E0E0"
+            android:background="#1BE0E0E0"
             />
 
     </FrameLayout>
@@ -49,47 +49,73 @@
             android:id="@+id/buttonContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/ib_gallery"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/ib_save"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 android:background="#B3E5FC"
                 android:scaleType="fitXY"
-                android:src="@drawable/gallery"
-                />
+                android:src="@drawable/save" />
+            <ImageButton
+                android:id="@+id/ib_gallery"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="#B3E5FC"
+                android:scaleType="fitXY"
+                android:src="@drawable/gallery" />
 
             <ImageButton
                 android:id="@+id/ib_brush"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 android:background="#B3E5FC"
                 android:scaleType="fitXY"
-                android:src="@drawable/paint_brush"
-                />
+                android:src="@drawable/paint_brush" />
+
+            <ImageButton
+                android:id="@+id/ib_undo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="#B3E5FC"
+                android:scaleType="fitXY"
+                android:src="@drawable/undo" />
+
+            <ImageButton
+                android:id="@+id/ib_redo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#B3E5FC"
+                android:scaleType="fitXY"
+                android:src="@drawable/redo" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayoutButtonContainer"
+            app:layout_constraintStart_toEndOf="@+id/buttonContainer"
             app:layout_constraintTop_toTopOf="parent">
 
 
-
             <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/black"
                 android:onClick="paintClicked"
@@ -98,8 +124,8 @@
 
             <ImageButton
 
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/red"
                 android:onClick="paintClicked"
@@ -107,8 +133,8 @@
                 android:tag="@color/red" />
 
             <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@color/yellow"
                 android:onClick="paintClicked"
                 android:src="@drawable/pallet_normal"

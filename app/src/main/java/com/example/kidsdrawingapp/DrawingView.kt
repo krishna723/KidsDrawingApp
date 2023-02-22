@@ -20,6 +20,7 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
     private var color= Color.RED
     private var canvas: Canvas?=null
     private var mPaths=ArrayList<CustomPath>()
+    private val mUndoPath=ArrayList<CustomPath>()
     private var lastX = 0f
     private var lastY = 0f
 
@@ -30,6 +31,22 @@ class DrawingView (context: Context, attrs: AttributeSet): View(context,attrs) {
         setUpDrawing()
     }
 
+    fun onClickUndo(){
+        val size=mPaths.size
+        if(size > 0){
+            mUndoPath.add(mPaths[size-1])
+            mPaths.removeAt(size-1)
+            invalidate()
+        }
+    }
+    fun onClickRedo(){
+        val size=mUndoPath.size
+        if(size > 0){
+            mPaths.add(mUndoPath[size-1])
+            mUndoPath.removeAt(size-1)
+            invalidate()
+        }
+    }
     private fun setUpDrawing() {
         mDrawPaint= Paint()
        // mDrawPaint!!.isAntiAlias()
